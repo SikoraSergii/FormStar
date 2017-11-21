@@ -9,7 +9,9 @@ import {
     MatInputModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatRadioModule
+    MatRadioModule,
+    MatToolbarModule,
+    MatSliderModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -29,7 +31,9 @@ import { AppComponent } from './app.component';
       MatInputModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      MatRadioModule
+      MatRadioModule,
+      MatToolbarModule,
+      MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

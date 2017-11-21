@@ -1,36 +1,63 @@
-<div mat-input-container>
-  <form [formGroup]="starForm" (ngSubmit)="onSubmit()">
-    <div class="" formGroupName="userData">
-      <div>
-        <mat-form-field>
-          <input matInput type="text" formControleName="firstName" class="" placeholder="First Name" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput type="text" formControleName="secondName" class="" placeholder="Second Name" />
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput type="text" formControleName="email" class="" placeholder="Email" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControleName="date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        
-      </div>
-      <div>
-        <mat-radio-group formControlName="gender">
-          <mat-radio-button value="male" formControlName="gender">Male</mat-radio-button>
-          <mat-radio-button value="female" formControlName="gender">Female</mat-radio-button>
+<div class="container">
+  <mat-toolbar color="primary">
+    <h1 class="mat-display-3">Do You Want to Become a Star?</h1>
+  </mat-toolbar>
+  
+  <div mat-input-container *ngIf="!message">
+    <form [formGroup]="starForm">
+      <div class="" formGroupName="userData">
+          <mat-form-field>
+            <input matInput type="text" formControlName="firstName" class="names" placeholder="First Name" />
+          </mat-form-field>
 
-        </mat-radio-group>
-      </div>
-      
-    </div>
+          <mat-form-field>
+            <input matInput type="text" formControlName="secondName" class="names" placeholder="Second Name" />
+          </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">Send</button>
+        <mat-form-field>
+            <input matInput type="text" formControlName="email" class="" placeholder="Email" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Date of Birth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-radio-group formControlName="gender" >
+            <span class="radioButoon"><mat-radio-button value="male">Male</mat-radio-button></span>
+            <span class="radioButoon"><mat-radio-button value="female">Female</mat-radio-button></span>
+          </mat-radio-group>
+      </div>
+      <div class="howHard">
+        <h3>How hard you want to be?</h3>
+        <mat-slider min="0" formControlName="howHard" max="3" step="1" value="0"></mat-slider>
+      </div>
+
+      <div class="buttonSection">
+        <span class="buttons">
+          <button mat-raised-button color="accent" type="button" (click)="onSubmit('rock')" [disabled]="!starForm.valid">
+            Rock Star
+          </button>
+        </span>
+        <span class="buttons" >
+          <button mat-raised-button class="buttons" color="primary" type="button" (click)="onSubmit('rap')" [disabled]="!starForm.valid">
+            Rap Star
+          </button>
+        </span>
+      </div>
     
-  </form>
+    </form>
+  </div>
+  <div class="message" *ngIf="message">
+    <div class="info">
+      <h3>{{message}}</h3>
+      <button mat-raised-button class="buttons" color="primary" type="button" (click)="newTry()">Try Again</button>
+    </div>
+    <div *ngIf="star"><img [src]="star.url" alt="Star" /></div>
+    
+  </div>
 </div>
+<audio controls autoplay>
+  <source src="\assets\03 - (Rap) Superstar.mp3" type="audio/mpeg" />
+</audio>
